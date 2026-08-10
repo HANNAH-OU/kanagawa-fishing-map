@@ -1,0 +1,456 @@
+:root {
+  /* Night map, and the surfaces that sit on it. */
+  --night: #0d1b26;
+  --night-deep: #071119;
+  --night-card: #122430;
+  --night-raise: #17303e;
+  --night-line: rgba(219, 230, 238, 0.14);
+  --night-ink: #e6eef4;
+  --night-ink-soft: #9db0be;
+  --night-label: #7a90a0;
+
+  --amber: #f5b942;
+  --lime: #7ede4f;
+
+  --font-display: ui-rounded, -apple-system, 'SF Pro Display',
+    'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif;
+  --font-script: 'Snell Roundhand', 'Apple Chancery', 'Segoe Script',
+    'Brush Script MT', cursive;
+  --font-ja: -apple-system, 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic UI',
+    system-ui, sans-serif;
+
+  /* Torn right edge for photos, from the card reference. */
+  --torn-right: polygon(
+    0 0,
+    95% 0,
+    99% 7%,
+    94% 17%,
+    100% 29%,
+    95% 41%,
+    100% 53%,
+    94% 64%,
+    99% 76%,
+    95% 88%,
+    100% 100%,
+    0 100%
+  );
+}
+
+.app {
+  position: relative;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--night);
+}
+
+/* ---- basemap: night chart ---- */
+
+/* grayscale() first kills the park greens and every other categorical colour,
+   so nothing but tone survives. invert() then sinks the white land to black and
+   lifts water a step above it; the blue cast and the low contrast keep roads and
+   place names as faint grey lines rather than map furniture. */
+.basemap-night {
+  filter: grayscale(1) invert(1) brightness(0.52) contrast(0.72) sepia(1)
+    hue-rotate(178deg) saturate(1.7);
+}
+
+.leaflet-container {
+  background: var(--night);
+  font-family: var(--font-ja);
+}
+
+/* Vignette: the reference darkens toward the frame, which keeps the eye on the
+   lit centre. */
+.leaflet-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    transparent 42%,
+    rgba(6, 16, 24, 0.5) 100%
+  );
+  pointer-events: none;
+}
+
+/* ---- top bar ---- */
+
+.topbar {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+  padding: 0 22px;
+  padding-top: env(safe-area-inset-top);
+  border-bottom: 1px solid var(--night-line);
+  background: linear-gradient(
+    100deg,
+    var(--night-deep) 0%,
+    var(--night) 58%,
+    #14313f 100%
+  );
+  pointer-events: none;
+  user-select: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--amber);
+  border-radius: 50%;
+  color: var(--amber);
+}
+
+.brand-mark svg {
+  width: 15px;
+  height: 15px;
+}
+
+.brand-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.topbar-line {
+  display: block;
+  width: 68px;
+  height: 1px;
+  background: rgba(219, 230, 238, 0.32);
+}
+
+.topbar-meta p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.topbar-meta span {
+  font-weight: 500;
+  color: var(--night-ink-soft);
+}
+
+/* ---- hero panel ---- */
+
+.hero {
+  position: absolute;
+  z-index: 900;
+  top: calc(58px + env(safe-area-inset-top) + 22px);
+  left: 22px;
+  width: 306px;
+  padding: 24px 26px 26px;
+  border: 1px solid var(--night-line);
+  background: linear-gradient(150deg, var(--night-deep), #123a4a 92%);
+  box-shadow: 0 20px 46px rgba(4, 12, 18, 0.55);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-eyebrow {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.hero h1 {
+  display: flex;
+  flex-direction: column;
+  margin: 14px 0 0;
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* The script word that overlaps the headline in the reference. */
+.hero h1 em {
+  margin: -2px 0 0 6px;
+  font-family: var(--font-script);
+  font-size: 46px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--amber);
+}
+
+.hero-lead {
+  margin: 20px 0 0;
+  font-family: var(--font-ja);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.95;
+  color: var(--night-ink-soft);
+}
+
+/* ---- outlined button (sharp corners, per the layout reference) ---- */
+
+.btn-outline {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 12px 22px;
+  border: 1px solid var(--amber);
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+/* ---- attribution ---- */
+
+.leaflet-control-attribution {
+  background: transparent;
+  font-family: var(--font-ja);
+  font-size: 9px;
+  color: rgba(219, 230, 238, 0.5);
+  text-shadow: 0 1px 3px var(--night-deep);
+}
+
+.leaflet-control-attribution a {
+  color: rgba(219, 230, 238, 0.68);
+}
+
+.leaflet-bottom.leaflet-right {
+  margin-bottom: 200px;
+}
+
+/* ---- markers: amber lamps ---- */
+
+/* divIcon ships with a white box and border by default. */
+.leaflet-div-icon {
+  background: transparent;
+  border: none;
+}
+
+.spot-mark {
+  position: relative;
+  cursor: pointer;
+}
+
+/* The lamp itself. */
+.mark-dot {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow:
+    0 0 0 2px rgba(245, 185, 66, 0.22),
+    0 0 10px 2px rgba(245, 185, 66, 0.6),
+    0 0 22px 6px rgba(245, 185, 66, 0.28);
+  box-sizing: border-box;
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease;
+}
+
+/* Soft light spill on the chart around it. */
+.mark-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(245, 185, 66, 0.3) 0%,
+    rgba(245, 185, 66, 0.1) 42%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.mark-pulse {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 1.5px solid var(--amber);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.mark-label {
+  position: absolute;
+  top: 50%;
+  left: 24px;
+  transform: translateY(-50%);
+  font-family: var(--font-ja);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(230, 238, 244, 0.82);
+  white-space: nowrap;
+  text-shadow:
+    0 0 4px var(--night-deep),
+    0 0 8px var(--night-deep),
+    0 1px 2px var(--night-deep);
+  transition: color 0.18s ease;
+}
+
+.spot-mark:hover .mark-dot {
+  transform: scale(1.2);
+}
+
+.spot-mark.is-selected .mark-dot {
+  transform: scale(1.32);
+  box-shadow:
+    0 0 0 3px rgba(245, 185, 66, 0.28),
+    0 0 16px 4px rgba(245, 185, 66, 0.75),
+    0 0 34px 10px rgba(245, 185, 66, 0.4);
+}
+
+.spot-mark.is-selected .mark-glow {
+  background: radial-gradient(
+    circle,
+    rgba(245, 185, 66, 0.45) 0%,
+    rgba(245, 185, 66, 0.16) 42%,
+    transparent 70%
+  );
+}
+
+.spot-mark.is-selected .mark-label {
+  color: var(--amber);
+  font-weight: 700;
+}
+
+.spot-mark.is-selected .mark-pulse {
+  display: block;
+  animation: mark-pulse 2.1s ease-out infinite;
+}
+
+@keyframes mark-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(4.2);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark-dot,
+  .mark-label {
+    transition: none;
+  }
+
+  .spot-mark.is-selected .mark-pulse {
+    animation: none;
+    opacity: 0.35;
+  }
+}
+
+/* ---- phone ---- */
+
+@media (max-width: 767px) {
+  .topbar {
+    height: 52px;
+    padding: 0 16px;
+  }
+
+  .brand-name {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+
+  .brand-mark {
+    width: 25px;
+    height: 25px;
+  }
+
+  .topbar-line {
+    width: 26px;
+  }
+
+  .topbar-meta p {
+    font-size: 10px;
+  }
+
+  .hero {
+    top: calc(52px + env(safe-area-inset-top) + 16px);
+    left: 16px;
+    width: min(258px, calc(100% - 32px));
+    padding: 18px 20px 20px;
+  }
+
+  .hero h1 {
+    margin-top: 11px;
+    font-size: 29px;
+  }
+
+  .hero h1 em {
+    font-size: 35px;
+  }
+
+  .hero-lead {
+    margin-top: 14px;
+    font-size: 11px;
+    line-height: 1.85;
+  }
+
+  .btn-outline {
+    margin-top: 16px;
+    padding: 10px 17px;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+
+  /* Ten Japanese place names at once is noise on a phone; the discs stay. */
+  .mark-label {
+    display: none;
+  }
+
+  .leaflet-bottom.leaflet-right {
+    margin-bottom: 184px;
+  }
+}

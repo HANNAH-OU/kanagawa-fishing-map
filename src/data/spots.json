@@ -1,0 +1,242 @@
+[
+  {
+    "id": "honmoku",
+    "name": "本牧海づり施設",
+    "nameKana": "ほんもくうみづりしせつ",
+    "lat": 35.4216,
+    "lng": 139.6685,
+    "city": "横浜市中区",
+    "type": "海釣り施設",
+    "description": "横浜を代表する海釣り施設",
+    "photos": [],
+    "fishSpecies": [
+      { "name": "アジ", "season": "初夏〜秋" },
+      { "name": "イワシ", "season": "夏〜秋" },
+      { "name": "シロギス", "season": "初夏〜秋" },
+      { "name": "カサゴ", "season": "通年" },
+      { "name": "カレイ", "season": "晩秋〜早春" },
+      { "name": "マダコ", "season": "夏〜秋" }
+    ],
+    "fee": {
+      "adult": "900円",
+      "child": "中学生450円／小学生300円"
+    },
+    "facilities": ["駐車場", "トイレ", "売店", "レンタル"],
+    "access": {
+      "station": "桜木町駅から市営バス26系統「海づり桟橋」下車",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "daikoku",
+    "name": "大黒海づり施設",
+    "nameKana": "だいこくうみづりしせつ",
+    "lat": 35.4585,
+    "lng": 139.6893,
+    "city": "横浜市鶴見区",
+    "type": "海釣り施設",
+    "description": "大黒ふ頭の先端にある海釣り施設。横浜市三大海づり施設のひとつ",
+    "photos": [],
+    "fishSpecies": [
+      { "name": "アジ", "season": "初夏〜秋" },
+      { "name": "サバ", "season": "夏〜秋" },
+      { "name": "シロギス", "season": "初夏〜秋" },
+      { "name": "カサゴ", "season": "通年" },
+      { "name": "カレイ", "season": "晩秋〜早春" },
+      { "name": "マダコ", "season": "夏〜秋" }
+    ],
+    "fee": {
+      "adult": "900円",
+      "child": "中学生450円／小学生300円"
+    },
+    "facilities": ["駐車場", "トイレ", "売店", "レンタル"],
+    "access": {
+      "station": "横浜駅西口から市営バス109系統「大黒海づり公園」下車",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "isogo",
+    "name": "磯子海づり施設",
+    "nameKana": "いそごうみづりしせつ",
+    "lat": 35.4035,
+    "lng": 139.6337,
+    "city": "横浜市磯子区",
+    "type": "海釣り施設",
+    "description": "新磯子町の岸壁に設けられた海釣り施設。足場がよく初心者向き",
+    "photos": [],
+    "fishSpecies": [
+      { "name": "アジ", "season": "初夏〜秋" },
+      { "name": "イワシ", "season": "夏〜秋" },
+      { "name": "メバル", "season": "冬〜春" },
+      { "name": "カサゴ", "season": "通年" },
+      { "name": "クロダイ", "season": "春〜秋" },
+      { "name": "マダコ", "season": "夏〜秋" }
+    ],
+    "fee": {
+      "adult": "500円",
+      "child": "300円"
+    },
+    "facilities": ["駐車場", "トイレ", "売店"],
+    "access": {
+      "station": "磯子駅から市営バス85系統「磯子海づり施設」下車",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "higashiogishima-nishi",
+    "name": "東扇島西公園",
+    "nameKana": "ひがしおうぎしまにしこうえん",
+    "lat": 35.4977,
+    "lng": 139.7433,
+    "city": "川崎市川崎区",
+    "type": "堤防",
+    "description": "人工海浜と釣り護岸を備えた無料の臨海公園",
+    "photos": [],
+    "fishSpecies": [
+      { "name": "アジ", "season": "初夏〜秋" },
+      { "name": "イワシ", "season": "夏〜秋" },
+      { "name": "シロギス", "season": "初夏〜秋" },
+      { "name": "ハゼ", "season": "夏〜秋" },
+      { "name": "カレイ", "season": "晩秋〜早春" },
+      { "name": "クロダイ", "season": "春〜秋" }
+    ],
+    "fee": {
+      "adult": "無料",
+      "child": "無料"
+    },
+    "facilities": ["駐車場"],
+    "access": {
+      "station": "川崎駅から市営バス川07系統「東扇島西公園前」下車",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "umibe-tsuri-koen",
+    "name": "海辺つり公園",
+    "nameKana": "うみべつりこうえん",
+    "lat": 35.2733,
+    "lng": 139.6555,
+    "city": "横須賀市",
+    "type": "海釣り施設",
+    "description": "平成町の海沿いにある無料の釣り公園。柵がありファミリー向き",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "jogashima",
+    "name": "城ヶ島",
+    "nameKana": "じょうがしま",
+    "lat": 35.1345,
+    "lng": 139.6152,
+    "city": "三浦市",
+    "type": "磯",
+    "description": "三浦半島最南端の島。磯釣りの名所として知られる",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "tsurugisaki",
+    "name": "剣崎",
+    "nameKana": "つるぎさき",
+    "lat": 35.145,
+    "lng": 139.6788,
+    "city": "三浦市",
+    "type": "磯",
+    "description": "三浦半島東南端の岬。潮通しがよい磯場",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "enoshima",
+    "name": "江ノ島",
+    "nameKana": "えのしま",
+    "lat": 35.2996,
+    "lng": 139.4805,
+    "city": "藤沢市",
+    "type": "磯",
+    "description": "湘南を代表する観光地。島の裏磯や湘南港の堤防が釣り場",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "hiratsuka-shinko",
+    "name": "平塚新港",
+    "nameKana": "ひらつかしんこう",
+    "lat": 35.3128,
+    "lng": 139.3403,
+    "city": "平塚市",
+    "type": "堤防",
+    "description": "相模川河口西側の漁港。港内に釣り開放エリアがある",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "hayakawa",
+    "name": "早川港",
+    "nameKana": "はやかわこう",
+    "lat": 35.235,
+    "lng": 139.152,
+    "city": "小田原市",
+    "type": "堤防",
+    "description": "小田原漁港。西湘エリアの代表的な港湾釣り場",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-10"
+  }
+]
