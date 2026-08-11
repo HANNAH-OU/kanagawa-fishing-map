@@ -604,33 +604,48 @@
     font-size: 10px;
   }
 
+  /* Every size below rides on vw between the 320px and 767px ends of this
+     breakpoint, so the panel shrinks with the screen instead of stepping once.
+     The clamp ceilings are the values the panel used to sit at, so the widest
+     phones look as they did and only narrow ones tighten up. */
   .hero {
-    top: calc(52px + env(safe-area-inset-top) + 16px);
-    left: 16px;
-    width: min(258px, calc(100% - 32px));
-    padding: 18px 20px 20px;
+    top: calc(52px + env(safe-area-inset-top) + 14px);
+    left: 14px;
+    width: min(232px, calc(100% - 40px));
+    padding: clamp(12px, 3.4vw, 16px) clamp(14px, 4vw, 18px)
+      clamp(14px, 3.8vw, 18px);
+  }
+
+  /* :root declares line-height as a percentage, which resolves against the root
+     font size and then inherits as a fixed 23.2px — so a 9px label was holding
+     open a 23px line box. Pinned here rather than at :root, which would move the
+     desktop layout too. */
+  .hero-eyebrow {
+    font-size: clamp(7.5px, 2.1vw, 9px);
+    line-height: 1.2;
   }
 
   .hero h1 {
-    margin-top: 11px;
-    font-size: 29px;
+    margin-top: clamp(7px, 2.4vw, 10px);
+    font-size: clamp(20px, 5.9vw, 27px);
   }
 
   .hero h1 em {
-    font-size: 35px;
+    font-size: clamp(25px, 7.2vw, 33px);
   }
 
   .hero-lead {
-    margin-top: 14px;
-    font-size: 11px;
-    line-height: 1.85;
+    margin-top: clamp(9px, 2.8vw, 12px);
+    font-size: clamp(9.5px, 2.7vw, 11px);
+    line-height: 1.75;
   }
 
   .btn-outline {
-    margin-top: 16px;
-    padding: 10px 17px;
-    font-size: 9px;
-    letter-spacing: 0.18em;
+    margin-top: clamp(11px, 3.2vw, 14px);
+    padding: clamp(8px, 2.4vw, 10px) clamp(13px, 3.8vw, 16px);
+    font-size: clamp(7.5px, 2.1vw, 9px);
+    line-height: 1.15;
+    letter-spacing: 0.16em;
   }
 
   /* Ten Japanese place names at once is noise on a phone; the lamps stay. */
@@ -674,6 +689,28 @@
     font-size: 11.5px;
     letter-spacing: 0.5em;
     text-indent: 0.5em;
+  }
+}
+
+/* The top bar's two ends nearly meet on the narrowest phones; drop the rule and
+   tighten the wordmark so neither side has to wrap. */
+@media (max-width: 380px) {
+  .brand-name {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .topbar-line {
+    display: none;
+  }
+
+  .topbar-meta {
+    gap: 0;
+  }
+
+  .brand-name,
+  .topbar-meta p {
+    white-space: nowrap;
   }
 }
 
