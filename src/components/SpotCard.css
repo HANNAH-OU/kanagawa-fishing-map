@@ -11,8 +11,11 @@
   color: inherit;
 }
 
+/* Leaflet measures the content and writes an inline width, so the override has
+   to be !important. Clamping against the viewport keeps the card inside the
+   screen on a 375px phone instead of hanging off the edge. */
 .spot-popup .leaflet-popup-content {
-  width: 320px !important;
+  width: min(320px, calc(100vw - 40px)) !important;
   margin: 0;
   line-height: inherit;
 }
@@ -248,15 +251,59 @@
 }
 
 @media (max-width: 767px) {
-  .spotcard-layer {
-    width: calc(100% - 24px);
-  }
-
   .spotcard-photo {
-    width: 82px;
+    width: 84px;
   }
 
   .spotcard-info {
-    padding: 12px 0;
+    padding: 13px 0;
+  }
+
+  /* A touch closer to comfortable reading size; the card has the room now that
+     it is no longer competing with a bottom list. */
+  .spotcard-name {
+    font-size: 15px;
+  }
+
+  .spotcard-city,
+  .spotcard-fish {
+    font-size: 11px;
+  }
+
+  .spotcard-hours {
+    font-size: 10.5px;
+  }
+
+  .spotcard-fee {
+    font-size: 13px;
+  }
+}
+
+/* Both actions are small by design. On touch they keep their look but gain an
+   invisible box big enough to hit reliably. */
+@media (pointer: coarse) {
+  .spotcard-more,
+  .spotcard-site {
+    position: relative;
+  }
+
+  .spotcard-more::after,
+  .spotcard-site::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 64px;
+    width: calc(100% + 28px);
+    height: 44px;
+    transform: translate(-50%, -50%);
+  }
+
+  .spotcard-foot {
+    padding-top: 14px;
+  }
+
+  .spotcard-site {
+    margin-top: 14px;
   }
 }

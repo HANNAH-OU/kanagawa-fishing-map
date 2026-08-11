@@ -28,3 +28,16 @@ body,
      gutter we are trying to rule out. */
   overflow: hidden;
 }
+
+html {
+  /* iOS Safari otherwise inflates text in landscape. */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  /* .app is sized in dvh while this chain is sized in %, and on iOS those differ
+     while the address bar is expanding. Painting the same navy here means the
+     brief mismatch shows more navy rather than a white band. */
+  background: #0d1b26;
+  -webkit-tap-highlight-color: transparent;
+}

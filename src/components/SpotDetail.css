@@ -297,6 +297,12 @@
     display: none;
   }
 
+  /* dvh tracks the shrinking viewport as Safari's address bar slides, so the
+     sheet never ends up taller than what is actually on screen. */
+  .detail {
+    max-height: 86dvh;
+  }
+
   .detail-hero {
     padding: 6px 18px 18px;
   }
@@ -305,8 +311,43 @@
     font-size: 18px;
   }
 
+  .detail-desc {
+    font-size: 13px;
+  }
+
   .detail-body {
     padding: 0 18px;
     padding-bottom: max(22px, env(safe-area-inset-bottom));
+  }
+
+  .detail-pairs {
+    font-size: 13px;
+  }
+
+  .chips li {
+    font-size: 12px;
+  }
+}
+
+@media (pointer: coarse) {
+  /* The grip is the only way to open the sheet on a phone, so it gets a full
+     thumb's worth of height. */
+  .detail-grip {
+    height: 28px;
+  }
+
+  .detail-grip::before {
+    width: 46px;
+    margin-top: 12px;
+  }
+
+  .detail-close {
+    top: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .detail-link {
+    padding: 16px 24px;
   }
 }

@@ -315,6 +315,18 @@ function FitToContainer() {
   return null
 }
 
+// Keeps an opened card clear of the chrome. The desktop values reserve the whole
+// hero column, which on a 375px screen would exceed the viewport and make
+// Leaflet's auto-pan arithmetic meaningless — a phone only reserves the top bar,
+// and the hero steps aside in CSS instead.
+function panPadding() {
+  const narrow = typeof window !== 'undefined' && window.innerWidth < 768
+
+  return narrow
+    ? { topLeft: [16, 84], bottomRight: [16, 28] }
+    : { topLeft: [352, 92], bottomRight: [28, 28] }
+}
+
 // Tapping bare map closes the detail sheet and brings the carousel back.
 function DeselectOnMapClick({ onDeselect }) {
   useMapEvents({ click: onDeselect })
@@ -322,6 +334,8 @@ function DeselectOnMapClick({ onDeselect }) {
 }
 
 function Map({ spots, selected, selectedId, onSelect, onDeselect, onOpenDetail }) {
+  const pad = panPadding()
+
   return (
     <MapContainer
       /* Framed to every spot rather than a fixed centre, so the Doshi-michi
@@ -373,8 +387,8 @@ function Map({ spots, selected, selectedId, onSelect, onDeselect, onOpenDetail }
           closeOnClick={false}
           autoClose={false}
           offset={[0, -10]}
-          autoPanPaddingTopLeft={[352, 92]}
-          autoPanPaddingBottomRight={[28, 28]}
+          autoPanPaddingTopLeft={pad.topLeft}
+          autoPanPaddingBottomRight={pad.bottomRight}
         >
           <SpotCard spot={selected} onOpenDetail={onOpenDetail} />
         </Popup>

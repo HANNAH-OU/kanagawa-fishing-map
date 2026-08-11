@@ -94,7 +94,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 58px;
+  /* box-sizing is border-box, so a fixed height plus the notch inset as padding
+     would crush the bar's contents to nothing on a notched iPhone. The inset has
+     to be added to the height, not taken out of it. */
+  height: calc(58px + env(safe-area-inset-top));
   padding: 0 22px;
   padding-top: env(safe-area-inset-top);
   border-bottom: 1px solid var(--night-line);
@@ -330,7 +333,7 @@
 .legend {
   position: absolute;
   z-index: 900;
-  bottom: 22px;
+  bottom: max(22px, env(safe-area-inset-bottom));
   left: 22px;
   pointer-events: none;
   user-select: none;
@@ -399,7 +402,7 @@
 /* The bottom edge is empty until a spot is picked, so the credit only steps up
    when a card or sheet is actually there to cover it. */
 .leaflet-bottom.leaflet-right {
-  margin-bottom: 4px;
+  margin-bottom: max(4px, env(safe-area-inset-bottom));
 }
 
 .app.has-sheet .leaflet-bottom.leaflet-right {
@@ -419,6 +422,23 @@
   --lamp: var(--amber);
   position: relative;
   cursor: pointer;
+}
+
+/* A 14px disc is a fine mouse target and a poor finger one. On touch the marker
+   gets an invisible 40px box — hit-tested as part of the marker, so nothing
+   about the lamp's appearance changes. Kept at 40 rather than 44 because several
+   spots sit within a few kilometres of each other and larger boxes would start
+   stealing each other's taps at the default zoom. */
+@media (pointer: coarse) {
+  .spot-mark::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+  }
 }
 
 /* Carries --lamp to the lit parts without generating a box of its own, so the
@@ -561,8 +581,9 @@
 
 @media (max-width: 767px) {
   .topbar {
-    height: 52px;
+    height: calc(52px + env(safe-area-inset-top));
     padding: 0 16px;
+    padding-top: env(safe-area-inset-top);
   }
 
   .brand-name {
@@ -617,12 +638,49 @@
     display: none;
   }
 
+  /* The hero paints above the map (it is a sibling of the whole Leaflet
+     container, so it outranks the popup pane inside it). On a narrow screen it
+     would cover a card opened over a north-western lamp, so it steps aside while
+     a spot is being read and comes back when the card closes. */
+  .app.has-pin .hero,
+  .app.has-sheet .hero {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s;
+  }
+
   .app.has-sheet .leaflet-bottom.leaflet-right {
     margin-bottom: 148px;
   }
 
-  /* The card owns the bottom of a phone screen once it is up. */
+  /* The sheet owns the bottom of a phone screen once it is up. */
   .app.has-sheet .legend {
+    display: none;
+  }
+
+  .region-en {
+    font-size: 13px;
+    letter-spacing: 0.34em;
+    text-indent: 0.34em;
+  }
+
+  .region-ja {
+    font-size: 9px;
+  }
+
+  .region.is-sea .region-ja {
+    font-size: 11.5px;
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+  }
+}
+
+/* Short viewports — a landscape phone — cannot afford the hero at all. */
+@media (max-height: 460px) and (max-width: 940px) {
+  .hero,
+  .legend {
     display: none;
   }
 }

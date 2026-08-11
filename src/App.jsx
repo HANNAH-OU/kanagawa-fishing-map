@@ -22,7 +22,11 @@ function App() {
   }
 
   return (
-    <div className={`app${detailOpen ? ' has-sheet' : ''}`}>
+    <div
+      className={`app${selected && !detailOpen ? ' has-pin' : ''}${
+        detailOpen ? ' has-sheet' : ''
+      }`}
+    >
       <Map
         spots={spots}
         selected={detailOpen ? null : selected}
