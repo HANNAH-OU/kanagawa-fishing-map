@@ -22,11 +22,12 @@
       "child": "中学生450円／小学生300円"
     },
     "facilities": ["駐車場", "トイレ", "売店", "レンタル"],
+    "hours": "6:00〜19:00（4〜10月）／7:00〜17:00（11〜3月）",
     "access": {
       "station": "桜木町駅から市営バス26系統「海づり桟橋」下車",
       "walkMinutes": null
     },
-    "officialUrl": "",
+    "officialUrl": "https://www.city.yokohama.lg.jp/kanko-bunka/minato/taikan/asobu/spot/umizuri.html",
     "updatedAt": "2026-08-10"
   },
   {
@@ -52,11 +53,12 @@
       "child": "中学生450円／小学生300円"
     },
     "facilities": ["駐車場", "トイレ", "売店", "レンタル"],
+    "hours": "6:00〜19:00（4〜10月）／7:00〜17:00（11〜3月）",
     "access": {
       "station": "横浜駅西口から市営バス109系統「大黒海づり公園」下車",
       "walkMinutes": null
     },
-    "officialUrl": "",
+    "officialUrl": "https://www.city.yokohama.lg.jp/kanko-bunka/minato/taikan/asobu/spot/umizuri.html",
     "updatedAt": "2026-08-10"
   },
   {
@@ -82,11 +84,12 @@
       "child": "300円"
     },
     "facilities": ["駐車場", "トイレ", "売店"],
+    "hours": "8:00〜18:00（3〜6月・9〜10月）／8:00〜19:00（7〜8月）",
     "access": {
       "station": "磯子駅から市営バス85系統「磯子海づり施設」下車",
       "walkMinutes": null
     },
-    "officialUrl": "",
+    "officialUrl": "https://www.city.yokohama.lg.jp/kanko-bunka/minato/taikan/asobu/spot/umizuri.html",
     "updatedAt": "2026-08-10"
   },
   {
@@ -112,11 +115,12 @@
       "child": "無料"
     },
     "facilities": ["駐車場"],
+    "hours": "24時間開放（入園無料）",
     "access": {
       "station": "川崎駅から市営バス川07系統「東扇島西公園前」下車",
       "walkMinutes": null
     },
-    "officialUrl": "",
+    "officialUrl": "https://www.city.kawasaki.jp/580/page/0000001336.html",
     "updatedAt": "2026-08-10"
   },
   {
@@ -132,6 +136,7 @@
     "fishSpecies": [],
     "fee": null,
     "facilities": [],
+    "hours": "",
     "access": {
       "station": "",
       "walkMinutes": null
@@ -152,6 +157,7 @@
     "fishSpecies": [],
     "fee": null,
     "facilities": [],
+    "hours": "",
     "access": {
       "station": "",
       "walkMinutes": null
@@ -172,6 +178,7 @@
     "fishSpecies": [],
     "fee": null,
     "facilities": [],
+    "hours": "",
     "access": {
       "station": "",
       "walkMinutes": null
@@ -192,6 +199,7 @@
     "fishSpecies": [],
     "fee": null,
     "facilities": [],
+    "hours": "",
     "access": {
       "station": "",
       "walkMinutes": null
@@ -212,6 +220,7 @@
     "fishSpecies": [],
     "fee": null,
     "facilities": [],
+    "hours": "",
     "access": {
       "station": "",
       "walkMinutes": null
@@ -232,11 +241,234 @@
     "fishSpecies": [],
     "fee": null,
     "facilities": [],
+    "hours": "",
     "access": {
       "station": "",
       "walkMinutes": null
     },
     "officialUrl": "",
     "updatedAt": "2026-08-10"
+  },
+  {
+    "id": "doshigawa-keiryu",
+    "name": "道志川渓流フィッシングセンター",
+    "nameKana": "どうしがわけいりゅうフィッシングセンター",
+    "lat": 35.527996,
+    "lng": 139.033432,
+    "city": "山梨県道志村",
+    "type": "管理釣り場",
+    "description": "道志川の清流を利用した渓流釣り場。エサ釣り場とフライエリアがある",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "hours": "",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "https://r.goope.jp/doushigyokyou/",
+    "updatedAt": "2026-08-11"
+  },
+  {
+    "id": "uratanzawa",
+    "name": "うらたんざわ渓流釣場",
+    "nameKana": "うらたんざわけいりゅうつりば",
+    "lat": 35.5203781,
+    "lng": 139.0988829,
+    "city": "相模原市緑区",
+    "type": "管理釣り場",
+    "description": "神ノ川最上流部の渓流釣場。フライ・テンカラ・ルアーのエリアに分かれる",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "hours": "",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "https://uratanzawa.com/",
+    "updatedAt": "2026-08-11"
+  },
+  {
+    "id": "kannogawa",
+    "name": "神之川キャンプマス釣場",
+    "nameKana": "かんのがわキャンプますつりば",
+    "lat": 35.5282434,
+    "lng": 139.1075912,
+    "city": "相模原市緑区",
+    "type": "管理釣り場",
+    "description": "道志渓谷のオートキャンプ場に併設されたマス釣り場",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "hours": "",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "https://kannogawa.jp/",
+    "updatedAt": "2026-08-11"
+  },
+  {
+    "id": "fishon-shishidome",
+    "name": "ベリーパーク in FISH ON! 鹿留",
+    "nameKana": "ベリーパークインフィッシュオンししどめ",
+    "lat": 35.5077711,
+    "lng": 138.8912361,
+    "city": "山梨県都留市",
+    "type": "管理釣り場",
+    "description": "宿泊施設を備えた滞在型の管理釣り場。本湖のほか渓流エリアがある",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "hours": "",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "https://www.sisidome.jp/",
+    "updatedAt": "2026-08-11"
+  },
+  {
+    "id": "narago",
+    "name": "奈良子釣りセンター",
+    "nameKana": "ならごつりセンター",
+    "lat": 35.673138,
+    "lng": 138.917099,
+    "city": "山梨県大月市",
+    "type": "管理釣り場",
+    "description": "奈良子川の自然渓流をそのまま活かした管理釣り場",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "hours": "6:30〜17:00／木曜定休",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "https://www.narago.jp/",
+    "updatedAt": "2026-08-11"
+  },
+  {
+    "id": "kosuge-trout-garden",
+    "name": "小菅トラウトガーデン",
+    "nameKana": "こすげトラウトガーデン",
+    "lat": 35.7572698,
+    "lng": 138.9511192,
+    "city": "山梨県小菅村",
+    "type": "管理釣り場",
+    "description": "小菅村養魚場が直営する管理釣り場。ルアー・フライ・テンカラに対応",
+    "photos": [],
+    "fishSpecies": [
+      { "name": "ニジマス", "season": "" },
+      { "name": "ヤマメ", "season": "" },
+      { "name": "イワナ", "season": "" },
+      { "name": "ブラウントラウト", "season": "" },
+      { "name": "イトウ", "season": "" }
+    ],
+    "fee": null,
+    "facilities": [],
+    "hours": "",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "http://kosuge-tg.com/",
+    "updatedAt": "2026-08-11"
+  },
+  {
+    "id": "kosuge-fishing-village",
+    "name": "小菅フィッシングビレッジ",
+    "nameKana": "こすげフィッシングビレッジ",
+    "lat": 35.760056,
+    "lng": 138.945175,
+    "city": "山梨県小菅村",
+    "type": "管理釣り場",
+    "description": "多摩川源流・小菅川を利用した釣りとバーベキューの施設",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "hours": "7:00〜17:00（12〜2月は休業）",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "https://www.fishingvillage.jp/",
+    "updatedAt": "2026-08-11"
+  },
+  {
+    "id": "oshino-fishing-area",
+    "name": "忍野フィッシングエリア",
+    "nameKana": "おしのフィッシングエリア",
+    "lat": 35.4607311,
+    "lng": 138.8503728,
+    "city": "山梨県忍野村",
+    "type": "管理釣り場",
+    "description": "富士山北麓、富士の伏流水を引いた池を持つ管理釣り場",
+    "photos": [],
+    "fishSpecies": [
+      { "name": "ニジマス", "season": "" },
+      { "name": "イワナ", "season": "" },
+      { "name": "ヤマメ", "season": "" },
+      { "name": "ブラウントラウト", "season": "" },
+      { "name": "コーホーサーモン", "season": "" }
+    ],
+    "fee": null,
+    "facilities": [],
+    "hours": "7:00〜17:00（4〜10月）／7:00〜16:00（11〜3月）・年中無休",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "",
+    "updatedAt": "2026-08-11"
+  },
+  {
+    "id": "katsuragawa-fly-lure",
+    "name": "桂川フライルアー釣場",
+    "nameKana": "かつらがわフライルアーつりば",
+    "lat": 35.62569,
+    "lng": 139.102493,
+    "city": "山梨県上野原市",
+    "type": "管理釣り場",
+    "description": "桂川漁業協同組合が管理する期間限定のフライ・ルアー専用釣場",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "hours": "8:30〜16:30（10月上旬〜5月末）",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "https://www.katsuragawa-gyokyo.net/cont1/20.html",
+    "updatedAt": "2026-08-11"
+  },
+  {
+    "id": "rivaspot-hayato",
+    "name": "リヴァスポット早戸",
+    "nameKana": "リヴァスポットはやと",
+    "lat": 35.5211226,
+    "lng": 139.19502,
+    "city": "相模原市緑区",
+    "type": "管理釣り場",
+    "description": "早戸川を利用した渓流型の管理釣り場。ルアー・フライ・テンカラ専用",
+    "photos": [],
+    "fishSpecies": [],
+    "fee": null,
+    "facilities": [],
+    "hours": "",
+    "access": {
+      "station": "",
+      "walkMinutes": null
+    },
+    "officialUrl": "https://www.hayatogawa.com/",
+    "updatedAt": "2026-08-11"
   }
 ]

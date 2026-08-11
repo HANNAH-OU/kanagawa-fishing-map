@@ -1,21 +1,35 @@
 import { useState } from 'react'
 import Map from './components/Map'
 import SpotDetail from './components/SpotDetail'
-import SpotCarousel from './components/SpotCarousel'
+import Legend from './components/Legend'
 import spots from './data/spots.json'
 import './App.css'
 
 function App() {
   const [selectedId, setSelectedId] = useState(null)
+  const [detailOpen, setDetailOpen] = useState(false)
   const selected = spots.find((spot) => spot.id === selectedId) ?? null
 
+  // Picking a different lamp swaps the card and drops back out of the sheet.
+  function selectSpot(id) {
+    setSelectedId(id)
+    setDetailOpen(false)
+  }
+
+  function closeSpot() {
+    setSelectedId(null)
+    setDetailOpen(false)
+  }
+
   return (
-    <div className="app">
+    <div className={`app${detailOpen ? ' has-sheet' : ''}`}>
       <Map
         spots={spots}
+        selected={detailOpen ? null : selected}
         selectedId={selectedId}
-        onSelect={setSelectedId}
-        onDeselect={() => setSelectedId(null)}
+        onSelect={selectSpot}
+        onDeselect={closeSpot}
+        onOpenDetail={() => setDetailOpen(true)}
       />
 
       <div className="topbar">
@@ -29,7 +43,7 @@ function App() {
               <path fill="currentColor" d="M3.2 10 .2 6.4v7.2z" />
             </svg>
           </span>
-          <p className="brand-name">Kanagawa Fishing</p>
+          <p className="brand-name">Hannah’s Fishing Map</p>
         </div>
 
         <div className="topbar-meta">
@@ -41,10 +55,10 @@ function App() {
       </div>
 
       <header className="hero">
-        <p className="hero-eyebrow">Kanagawa Prefecture</p>
+        <p className="hero-eyebrow">A personal fishing guide</p>
         <h1>
-          Fishing for
-          <em>Kanagawa</em>
+          Hannah’s
+          <em>Hobby</em>
         </h1>
         <p className="hero-lead">
           海釣り施設・堤防・磯を{spots.length}か所。
@@ -57,12 +71,12 @@ function App() {
         <span className="btn-outline">Explore Spots</span>
       </header>
 
-      {/* The bottom belongs to one of the two: browse the carousel, or read the
-          spot you just tapped. */}
-      {selected ? (
-        <SpotDetail spot={selected} onClose={() => setSelectedId(null)} />
-      ) : (
-        <SpotCarousel spots={spots} onSelect={setSelectedId} />
+      <Legend />
+
+      {/* The compact card is anchored to its lamp inside the map; only the full
+          sheet lives out here, and only once 詳細 is pressed. */}
+      {selected && detailOpen && (
+        <SpotDetail spot={selected} onClose={() => setDetailOpen(false)} />
       )}
     </div>
   )

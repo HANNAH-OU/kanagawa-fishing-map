@@ -11,6 +11,8 @@
 
   --amber: #f5b942;
   --lime: #7ede4f;
+  /* Cool chart light: coastlines and region blooms, never the lamps. */
+  --chart-glow: #6fc3ff;
 
   --font-display: ui-rounded, -apple-system, 'SF Pro Display',
     'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif;
@@ -49,9 +51,13 @@
    so nothing but tone survives. invert() then sinks the white land to black and
    lifts water a step above it; the blue cast and the low contrast keep roads and
    place names as faint grey lines rather than map furniture. */
+/* The blur is the part that targets roads specifically: contrast scales roads
+   and coastline alike, but a sub-pixel blur robs a 1px road line of most of its
+   amplitude while a large water body keeps its tone. Roads go hazy, the coast
+   stays. */
 .basemap-night {
-  filter: grayscale(1) invert(1) brightness(0.52) contrast(0.72) sepia(1)
-    hue-rotate(178deg) saturate(1.7);
+  filter: grayscale(1) invert(1) brightness(0.56) contrast(0.72) blur(0.65px)
+    sepia(1) hue-rotate(176deg) saturate(1.9);
 }
 
 .leaflet-container {
@@ -59,17 +65,20 @@
   font-family: var(--font-ja);
 }
 
-/* Vignette: the reference darkens toward the frame, which keeps the eye on the
-   lit centre. */
+/* No full-screen veil here on purpose: a CSS overlay cannot spare the regions,
+   so the darkening is done by the holed polygon in the map itself (pane 320).
+   All that is left at this level is the frame fall-off. */
+
+/* A gentle fall-off at the frame, over the region layer too, for depth. */
 .leaflet-container::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 500;
   background: radial-gradient(
-    ellipse at 50% 45%,
-    transparent 42%,
-    rgba(6, 16, 24, 0.5) 100%
+    ellipse at 50% 46%,
+    transparent 52%,
+    rgba(3, 9, 15, 0.34) 100%
   );
   pointer-events: none;
 }
@@ -234,6 +243,145 @@
   color: var(--amber);
 }
 
+/* ---- region names ---- */
+
+/* Reference language: a cool nebula of light marks the area, the type is small,
+   uppercase and widely tracked, and amber stays reserved for the lamps. */
+.region {
+  position: relative;
+  pointer-events: none;
+}
+
+.region-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+/* The disc of light that used to sit behind every label is gone: it read as a
+   halo around the text, which is exactly the ring a region must not have. The
+   region wash on the map now carries that job on its own. */
+
+.region-en,
+.region-ja {
+  position: relative;
+  line-height: 1;
+}
+
+/* Primary label: uppercase, widely tracked — the "REIS LOCATIES" treatment,
+   scaled up to carry a whole region. */
+.region-en {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.4em;
+  /* Tracking adds space after the last glyph; pull it back so the word stays
+     centred on its point. */
+  text-indent: 0.4em;
+  text-transform: uppercase;
+  color: rgba(222, 242, 255, 0.72);
+  /* Dark shadow only, for legibility. The cyan bloom that used to sit under the
+     lettering was another bright area competing with the lamps. */
+  text-shadow:
+    0 1px 6px var(--night-deep),
+    0 0 3px var(--night-deep);
+}
+
+.region-ja {
+  font-family: var(--font-ja);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  color: color-mix(in srgb, var(--chart-glow) 62%, transparent);
+  text-shadow: 0 1px 6px var(--night-deep);
+}
+
+/* Bay names take the italic, widely-spaced treatment sea areas get on a chart,
+   and stay a tier below the enclosed regions. */
+.region.is-sea .region-ja {
+  font-size: 13px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.66em;
+  text-indent: 0.66em;
+  color: color-mix(in srgb, var(--chart-glow) 40%, transparent);
+  text-shadow:
+    0 1px 6px var(--night-deep),
+    0 0 3px var(--night-deep);
+}
+
+/* Screen puts light back into the darkened chart instead of laying a translucent
+   colour over it: the falloff comes from the gradient's own alpha ramp, which has
+   no edge to feather, and the map's own contrast survives underneath. */
+.region-glow {
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* ---- legend ---- */
+
+.legend {
+  position: absolute;
+  z-index: 900;
+  bottom: 22px;
+  left: 22px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.legend-title {
+  margin: 0 0 9px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(219, 230, 238, 0.2);
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(219, 230, 238, 0.55);
+}
+
+.legend ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-ja);
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: rgba(219, 230, 238, 0.85);
+  text-shadow: 0 1px 3px var(--night-deep);
+  white-space: nowrap;
+}
+
+/* Same lit dot as on the map, at half size. */
+.legend-lamp {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--lamp);
+  box-shadow:
+    0 0 6px 1px color-mix(in srgb, var(--lamp) 55%, transparent),
+    0 0 12px 3px color-mix(in srgb, var(--lamp) 25%, transparent);
+}
+
 /* ---- attribution ---- */
 
 .leaflet-control-attribution {
@@ -248,8 +396,14 @@
   color: rgba(219, 230, 238, 0.68);
 }
 
+/* The bottom edge is empty until a spot is picked, so the credit only steps up
+   when a card or sheet is actually there to cover it. */
 .leaflet-bottom.leaflet-right {
-  margin-bottom: 200px;
+  margin-bottom: 4px;
+}
+
+.app.has-sheet .leaflet-bottom.leaflet-right {
+  margin-bottom: 152px;
 }
 
 /* ---- markers: amber lamps ---- */
@@ -261,8 +415,16 @@
 }
 
 .spot-mark {
+  /* Overridden inline per marker; amber is what every sea spot resolves to. */
+  --lamp: var(--amber);
   position: relative;
   cursor: pointer;
+}
+
+/* Carries --lamp to the lit parts without generating a box of its own, so the
+   absolutely positioned children still lay out against .spot-mark. */
+.lamp {
+  display: contents;
 }
 
 /* The lamp itself. */
@@ -273,11 +435,14 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--amber);
+  /* The disc itself is untouched — it is the one thing that should stay bright.
+     Only the halo around it is pulled in and thinned, so a dozen lamps no longer
+     pool into one bright wash. */
+  background: var(--lamp);
   box-shadow:
-    0 0 0 2px rgba(245, 185, 66, 0.22),
-    0 0 10px 2px rgba(245, 185, 66, 0.6),
-    0 0 22px 6px rgba(245, 185, 66, 0.28);
+    0 0 0 1.5px color-mix(in srgb, var(--lamp) 15%, transparent),
+    0 0 7px 1px color-mix(in srgb, var(--lamp) 42%, transparent),
+    0 0 14px 4px color-mix(in srgb, var(--lamp) 19%, transparent);
   box-sizing: border-box;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -289,14 +454,14 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 64px;
-  height: 64px;
-  margin: -32px 0 0 -32px;
+  width: 42px;
+  height: 42px;
+  margin: -21px 0 0 -21px;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(245, 185, 66, 0.3) 0%,
-    rgba(245, 185, 66, 0.1) 42%,
+    color-mix(in srgb, var(--lamp) 20%, transparent) 0%,
+    color-mix(in srgb, var(--lamp) 6%, transparent) 42%,
     transparent 70%
   );
   pointer-events: none;
@@ -310,7 +475,7 @@
   width: 14px;
   height: 14px;
   margin: -7px 0 0 -7px;
-  border: 1.5px solid var(--amber);
+  border: 1.5px solid var(--lamp);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -340,22 +505,22 @@
 .spot-mark.is-selected .mark-dot {
   transform: scale(1.32);
   box-shadow:
-    0 0 0 3px rgba(245, 185, 66, 0.28),
-    0 0 16px 4px rgba(245, 185, 66, 0.75),
-    0 0 34px 10px rgba(245, 185, 66, 0.4);
+    0 0 0 2px color-mix(in srgb, var(--lamp) 20%, transparent),
+    0 0 11px 3px color-mix(in srgb, var(--lamp) 52%, transparent),
+    0 0 22px 6px color-mix(in srgb, var(--lamp) 27%, transparent);
 }
 
 .spot-mark.is-selected .mark-glow {
   background: radial-gradient(
     circle,
-    rgba(245, 185, 66, 0.45) 0%,
-    rgba(245, 185, 66, 0.16) 42%,
+    color-mix(in srgb, var(--lamp) 31%, transparent) 0%,
+    color-mix(in srgb, var(--lamp) 11%, transparent) 42%,
     transparent 70%
   );
 }
 
 .spot-mark.is-selected .mark-label {
-  color: var(--amber);
+  color: var(--lamp);
   font-weight: 700;
 }
 
@@ -364,16 +529,18 @@
   animation: mark-pulse 2.1s ease-out infinite;
 }
 
+/* Pulled in and dimmed too — a ring sweeping out to four times the disc was a
+   large moving bright area in its own right. */
 @keyframes mark-pulse {
   0% {
     transform: scale(1);
-    opacity: 0.8;
+    opacity: 0.55;
   }
   70% {
     opacity: 0;
   }
   100% {
-    transform: scale(4.2);
+    transform: scale(2.8);
     opacity: 0;
   }
 }
@@ -445,12 +612,17 @@
     letter-spacing: 0.18em;
   }
 
-  /* Ten Japanese place names at once is noise on a phone; the discs stay. */
+  /* Ten Japanese place names at once is noise on a phone; the lamps stay. */
   .mark-label {
     display: none;
   }
 
-  .leaflet-bottom.leaflet-right {
-    margin-bottom: 184px;
+  .app.has-sheet .leaflet-bottom.leaflet-right {
+    margin-bottom: 148px;
+  }
+
+  /* The card owns the bottom of a phone screen once it is up. */
+  .app.has-sheet .legend {
+    display: none;
   }
 }

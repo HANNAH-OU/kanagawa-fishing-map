@@ -12,7 +12,15 @@ export const TYPE_COLORS = {
   堤防: '#5bc8a5',
   磯: '#ef8354',
   河口: '#6ba8d6',
-  管理釣り場: '#b8a0e0',
+  管理釣り場: '#3fd39b',
+}
+
+// Lamp colour on the map. Everything on salt water keeps the amber it already
+// has; only the inland managed waters get their own colour.
+export const MARKER_SEA = '#f5b942'
+
+export function markerColor(type) {
+  return type === '管理釣り場' ? TYPE_COLORS[type] : MARKER_SEA
 }
 
 export const DEFAULT_TYPE_COLOR = '#9fb0bd'

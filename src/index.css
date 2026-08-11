@@ -10,6 +10,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body,
 #root {
@@ -17,4 +23,8 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  /* A full-screen map never scrolls in either axis. Note overflow-x alone would
+     force overflow-y to compute to auto, which can produce the very scrollbar
+     gutter we are trying to rule out. */
+  overflow: hidden;
 }

@@ -1,14 +1,24 @@
-import { TYPE_COLORS } from '../typeStyles'
+import { markerColor } from '../typeStyles'
+
+// Keyed to what the lamps actually encode: salt water versus managed inland
+// water. The amber row covers 海釣り施設・堤防・磯, which all share one colour.
+const KEYS = [
+  { label: '海釣り', type: '海釣り施設' },
+  { label: '管理釣り場', type: '管理釣り場' },
+]
 
 function Legend() {
   return (
     <div className="legend">
-      <p className="legend-title">Type</p>
+      <p className="legend-title">Legend</p>
       <ul>
-        {Object.entries(TYPE_COLORS).map(([type, color]) => (
-          <li key={type}>
-            <span className="legend-dot" style={{ backgroundColor: color }} />
-            {type}
+        {KEYS.map((key) => (
+          <li key={key.type}>
+            <span
+              className="legend-lamp"
+              style={{ '--lamp': markerColor(key.type) }}
+            />
+            {key.label}
           </li>
         ))}
       </ul>

@@ -33,7 +33,9 @@ function CloseGlyph() {
 }
 
 function SpotDetail({ spot, onClose }) {
-  const [expanded, setExpanded] = useState(false)
+  // Reached by pressing 詳細, so it opens showing the detail rather than making
+  // you tap the grip first.
+  const [expanded, setExpanded] = useState(true)
 
   const hasSpecies = spot.fishSpecies.length > 0
   const hasFacilities = spot.facilities.length > 0
